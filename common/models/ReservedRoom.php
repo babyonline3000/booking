@@ -31,11 +31,11 @@ class ReservedRoom extends ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'phone', 'date_to_reserved', 'created_at'], 'required'],
+            [['username', 'phone', 'date_to_reserved', 'date_out_reserved'], 'required','message' => 'Поле обязательно для заполения'],
             [['username', 'phone', 'date_to_reserved', 'date_out_reserved', 'created_at'], 'string'],
             [['username', 'phone', 'date_to_reserved', 'date_out_reserved', 'created_at'], 'trim'],
             [['rooms_id'], 'exist', 'skipOnError' => true, 'targetClass' => Rooms::class, 'targetAttribute' => ['rooms_id' => 'id']],
-            [['date_out_reserved'], 'default', 'value' => null],
+//            [['date_out_reserved'], 'default', 'value' => null],
         ];
     }
 
@@ -69,5 +69,13 @@ class ReservedRoom extends ActiveRecord
                 'value' => date('Y-m-d H:i:s'),
             ],
         ];
+    }
+
+    /**
+     * @return \common\models\queries\Rooms
+     */
+    public function getRoom()
+    {
+        return $this->hasOne(Rooms::class, ['id' => 'rooms_id']);
     }
 }

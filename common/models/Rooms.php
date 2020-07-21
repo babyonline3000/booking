@@ -27,7 +27,7 @@ class Rooms extends ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
+//            [['name'], 'required'],
             [['name', 'description'], 'string'],
             [['name', 'description'], 'trim'],
         ];
